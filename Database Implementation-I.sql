@@ -1,0 +1,164 @@
+CREATING TABLES
+
+
+1.Customer
+	CREATE TABLE `CUSTOMER` (
+		`CID` INT NOT NULL AUTO_INCREMENT, 
+		`FName` VARCHAR(20) NOT NULL,
+		`LName` VARCHAR(20) NOT NULL, 
+		`CMail` VARCHAR(40) NOT NULL,
+		`CAddress` VARCHAR(45) NOT NULL,
+		`JobTitle` VARCHAR(10) NOT NULL
+		`CNumber` DECIMAL(10,0) NOT NULL,
+		PRIMARY KEY (`CID`)
+	);
+
+
+
+
+
+2.Admin
+	CREATE TABLE `ADMIN` (
+		`AID` INT NOT NULL AUTO_INCREMENT, 
+		`CID` INT NULL, 
+		`PID` INT NULL,  
+		`WID` INT NULL,  
+		`AName` VARCHAR(45) NOT NULL, 
+		`Password` VARCHAR(20) NOT NULL,  
+		`AMail` VARCHAR(40) NOT NULL,  
+		PRIMARY KEY (`AID`)
+	);
+
+
+ 
+
+
+3.Booking1
+	CREATE TABLE `BOOKING 1` (  
+		`B1ID` INT NOT NULL AUTO_INCREMENT,
+		`CID` INT NOT NULL,
+		`RID` int NOT NULL,
+		`FromDate` DATE NOT NULL,  
+		`ToDate` DATE NOT NULL,  
+		`Members` INT NOT NULL,  
+		`NoOfRooms` INT NOT NULL,  
+		`B1Price` DECIMAL(10,2) NOT NULL,  PRIMARY KEY (`B1ID`)
+	);
+
+
+
+
+
+4.Booking 2
+	CREATE TABLE `BOOKING 2` (
+		`B2ID` INT NOT NULL AUTO_INCREMENT, 
+		`CID` INT REFERENCES `CUSTOMER`(`CID`),  
+		`BHID` INT, `SID` INT,  
+		`FromDate` DATE NOT NULL, 
+		`ToDate` DATE NOT NULL, 
+		`FromTime` TIME NOT NULL, 
+		`ToTime` TIME NOT NULL, 
+		`B2Price` DECIMAL(10,2) NOT NULL,  
+		PRIMARY KEY (`B2ID`)
+	);
+
+  
+
+
+
+5.List of Workers
+	CREATE TABLE `LIST OF WORKERS` (
+		`WID` INT NOT NULL AUTO_INCREMENT,  
+		`WName` VARCHAR(45) NOT NULL,  
+		`WAddress` VARCHAR(45) NOT NULL, 
+		`WMail` VARCHAR(45) NOT NULL,  
+		`WSalary` DECIMAL(10,2) NOT NULL,  
+		`WDesignation` VARCHAR(45) NOT NULL, 
+		PRIMARY KEY (`WID`)
+	);
+
+
+
+
+
+6.Room Type
+	CREATE TABLE `ROOM TYPE` ( 
+		`RoomTypeID` CHAR NOT NULL, 
+		`RoomType` VARCHAR() NOT NULL,
+		`RPrice` DECIMAL(10,2) NOT NULL,
+		PRIMARY KEY (`RoomTypeID`)
+	);
+
+
+
+
+
+7.Rooms
+	CREATE TABLE `ROOMS` (
+		`RID` INT NOT NULL AUTO_INCREMENT, 
+		`RoomTypeID` CHAR NOT NULL, 
+		`RoomNumber` INT NOT NULL, 
+		`Status` TINYINT(1) NOT NULL, 
+		PRIMARY KEY (`RID`)
+	);
+
+
+
+
+
+8.Banquet Hall Category
+	CREATE TABLE `BH Category` ( 
+		`BHCategoryID` CHAR NOT NULL,
+		`BHCategory` VARCHAR(20) NOT NULL,
+		`BHPrice` DECIMAL(10,2) NOT NULL, 
+		PRIMARY KEY (`BHCategoryID`)
+	);
+
+
+
+
+
+9.Banquet Hall
+	CREATE TABLE `BANQUET HALL` (
+		`BHID` INT NOT NULL AUTO_INCREMENT,
+		`BHCategoryID` CHAR NOT NULL,
+		`Status` TINYINT(1) NOT NULL, PRIMARY KEY (`BHID`)
+	);
+
+
+
+
+
+10.Spa Type
+	CREATE TABLE `SPA TYPE` (
+		`SpaTypeID` CHAR NOT NULL,
+		`SpaType` VARCHAR(10) NOT NULL,
+		`SPrice` DECIMAL(10,2) NOT NULL, PRIMARY KEY (`SpaTypeID`)
+	);
+
+
+
+
+
+11.Spa
+	CREATE TABLE `SPA` (
+		`SID` INT NOT NULL AUTO_INCREMENT, 
+		`SpaTypeID` CHAR NOT NULL,
+		`Status` TINYINT(1) NOT NULL,  PRIMARY KEY (`SID`)
+	);
+
+
+
+
+
+12.Payment
+	CREATE TABLE `PAYMENT` (
+		`PID` INT NOT NULL AUTO_INCREMENT,
+		`CID` INT NOT NULL,
+		`B1ID` INT NULL,
+		`B2ID` INT NULL,
+		`PDate` DATE NOT NULL,
+		`PType` VARCHAR(10) NOT NULL,
+		`PStatus` TINYINT(1) NOT NULL,
+		`FinalBill` DECIMAL(10,2) NOT NULL,  PRIMARY KEY (`PID`)
+	);
